@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { trackPromise } from 'react-promise-tracker';
 import axios from 'axios';
 import { GITHUB_API_URL, GITHUB_API_REPOS_URL } from './../constants/GithubApi';
@@ -57,16 +58,18 @@ const Form = props => {
   };  
 
   return (
-    <StyledForm 
-      onSubmit={e => {
-        e.preventDefault();
-        fetchData(`${GITHUB_API_URL(userInput.trim())}`);
-      }
-    }>
-      <Label htmlFor="text">Enter a Github Username or Organization:</Label>
-      <StyledInput type="text" id="text" name="text" placeholder="eg. Octocat" value={userInput} onChange={handleChange} />
-      <StyledInput type="submit"value="Submit" />
-    </StyledForm>
+    <Router>
+      <StyledForm 
+        onSubmit={e => {
+          e.preventDefault();
+          fetchData(`${GITHUB_API_URL(userInput.trim())}`);
+        }
+      }>
+        <Label htmlFor="text">Enter a Github Username or Organization:</Label>
+        <StyledInput type="text" id="text" name="text" placeholder="eg. Octocat" value={userInput} onChange={handleChange} />
+        <Link to={`/user/${userInput}`}><StyledInput type="submit" value="Submit" /></Link>
+      </StyledForm>
+    </Router>
   )
 };
 

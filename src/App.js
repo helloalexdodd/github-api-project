@@ -52,7 +52,7 @@ const App = () => {
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>
-          <Route path='/user' render={() => (
+          <Route path={`/user/:${userData.login}`} render={() => (
             <RepoList
               userRepos={userRepos}
               userData={userData} 
