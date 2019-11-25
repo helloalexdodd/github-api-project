@@ -31,7 +31,7 @@ const StyledInput = styled.input`
 `;
 
 const Form = props => {
-  const { handleData, userInput, setUserInput, userData } = props;
+  const { handleData, userInput, setUserInput, userData, history } = props;
   const didMountRef = useRef(false);
   
   useEffect(() => {
@@ -48,7 +48,7 @@ const Form = props => {
 
   const handleSubmit = () => {
     const userName = userInput.trim();
-    props.history.push(`/user/${userName}`);
+    history.push(`/user/${userName}`);
     fetchData(`${GITHUB_API_URL(userName)}`);
   };
 
