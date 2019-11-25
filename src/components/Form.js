@@ -30,7 +30,7 @@ const StyledInput = styled.input`
 `;
 
 const Form = props => {
-  const { handleData, userInput, setUserInput, userData} = props;
+  const { handleData, userInput, setUserInput, userData } = props;
   const didMountRef = useRef(false);
   
   useEffect(() => {

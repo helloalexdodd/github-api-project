@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { GlobalStyle, Wrapper } from './GlobalStyles';
 import Header from './components/Header';
@@ -37,7 +38,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <Router>
       <GlobalStyle />
       <Header userData={userData} userStatus={userStatus} />
       <main>
@@ -51,14 +52,17 @@ const App = () => {
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>
-          <RepoList
-            userData={userData}
-            userRepos={userRepos}
-            userStatus={userStatus}
+          <Route path={'/user'} render={(props) => (
+            <RepoList
+              userRepos={userRepos}
+              userData={userData} 
+              userStatus={userStatus}
+              history={props.history}
+            />)}
           />
         </Wrapper>
       </main>
-    </>
+    </Router>
   );
 }
 

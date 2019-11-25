@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePromiseTracker } from "react-promise-tracker";
+import { usePromiseTracker } from 'react-promise-tracker';
 import LoadingIndicator from './LoadingIndicator';
 import styled from 'styled-components';
 import Repo from './Repo';
@@ -8,7 +8,7 @@ import Repo from './Repo';
 const UserInfo = props => {
   const { userRepos, userData, userStatus } = props;
   const { promiseInProgress } = usePromiseTracker();
-  
+
   const RepoInfoContainer = styled.div`
     margin-top: 100px;
   `;
