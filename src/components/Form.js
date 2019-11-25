@@ -31,7 +31,7 @@ const StyledInput = styled.input`
 `;
 
 const Form = props => {
-  const { handleData, userInput, setUserInput, userData, redirect, setRedirect } = props;
+  const { handleData, userInput, setUserInput, userData, setRedirect } = props;
   const didMountRef = useRef(false);
   
   useEffect(() => {
@@ -47,8 +47,8 @@ const Form = props => {
   const handleChange = e => setUserInput(e.target.value);
 
   const handleSubmit = () => {
-    fetchData(`${GITHUB_API_URL(userInput.trim())}`);
     setRedirect(true);
+    fetchData(`${GITHUB_API_URL(userInput.trim())}`);
   }
   
   const fetchData = (url) => {

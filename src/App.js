@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { GlobalStyle, Wrapper } from './GlobalStyles';
 import Header from './components/Header';
@@ -50,7 +50,6 @@ const App = () => {
               userInput={userInput}
               setUserInput={setUserInput}
               userData={userData}
-              redirect={redirect}
               setRedirect={setRedirect}
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
