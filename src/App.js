@@ -52,12 +52,11 @@ const App = () => {
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>
-          <Route path={'/user'} render={(props) => (
+          <Route path='/user' render={() => (
             <RepoList
               userRepos={userRepos}
               userData={userData} 
               userStatus={userStatus}
-              history={props.history}
             />)}
           />
         </Wrapper>
