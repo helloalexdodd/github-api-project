@@ -1,8 +1,7 @@
-import React, { useState, useEffect, userRef } from 'react';
-import { GlobalStyle, Wrapper } from './GlobalStyles';
-import HandleData from './components/HandleData';
-import Header from './components/Header';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { GlobalStyle, Wrapper } from './GlobalStyles';
+import Header from './components/Header';
 import Form from './components/Form';
 import ProfilePicture from './components/ProfilePicture';
 import RepoList from './components/RepoList';
@@ -23,38 +22,34 @@ const App = () => {
   const [userRepos, setUserRepos] = useState('');
   const [userStatus, setUserStatus] = useState('')
 
-  useEffect(() => {
-    document.getElementById('text').focus();
-  });
-
-  const handleChange = e => setUserInput(e.target.value);
+  const handleData = (data) => {
+    if (data === undefined) {
+      setUserStatus('Sorry your search has not returned any results.');
+      setUserRepos('');
+      setUserInput('');
+    } else if (data.login) {
+      setUserStatus('');
+      setUserData(data);
+      setUserInput('');
+    } else if (Array.isArray(data)) {
+      setUserRepos(data);
+    }
+  }
 
   return (
     <>
       <GlobalStyle />
-      <HandleData 
-        userData={userData}
-        setUserData={setUserData}
-        setUserInput={setUserInput}
-        setUserRepos={setUserRepos}
-        setUserStatus={setUserStatus}        
-      />
-      <Header 
-        userData={userData} 
-        userStatus={userStatus}
-      />
+      <Header userData={userData} userStatus={userStatus} />
       <main>
         <Wrapper>
           <FormContainer>
             <Form
-              handleChange={handleChange}
+              handleData={handleData}
               userInput={userInput}
-              setUserData={setUserData}
-            />
-            <ProfilePicture 
+              setUserInput={setUserInput}
               userData={userData}
-              userStatus={userStatus}
             />
+            <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>
           <RepoList
             userData={userData}

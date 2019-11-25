@@ -44,7 +44,7 @@ const Repo = props => {
         }
       }
     }
-  `;
+`;
 
   return (
     <Repo>

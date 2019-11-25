@@ -1,6 +1,6 @@
 import React from 'react';
-import { usePromiseTracker } from "react-promise-tracker";
 import LoadingIndicator from './LoadingIndicator';
+import { usePromiseTracker } from "react-promise-tracker";
 import Octocat from './../images/Octocat.jpg';
 import ShatteredOctocat from './../images/ShatteredOctocat.png';
 import styled from 'styled-components';
