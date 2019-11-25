@@ -1,23 +1,23 @@
 import React from 'react';
-import LoadingIndicator from './LoadingIndicator';
 import { usePromiseTracker } from "react-promise-tracker";
+import LoadingIndicator from './LoadingIndicator';
 import Octocat from './../images/Octocat.jpg';
 import ShatteredOctocat from './../images/ShatteredOctocat.png';
 import styled from 'styled-components';
 import { A } from '../GlobalStyles';
 
-const ImageContainer = styled.div`
-  width: 40%;
-  margin: 0 50px 50px 50px;
-
-  @media (max-width: 600px) {
-   margin-top: 50px;
-  }
-`;
-
 const ProfilePicture = props => {
   const { userData, userStatus } = props;
   const { promiseInProgress } = usePromiseTracker();
+  
+  const ImageContainer = styled.div`
+    width: 40%;
+    margin: 0 50px 50px 50px;
+  
+    @media (max-width: 600px) {
+     margin-top: 50px;
+    }
+  `;
   
   const Image = styled.img`
     max-width: 400px;
