@@ -31,7 +31,7 @@ const StyledInput = styled.input`
 `;
 
 const Form = props => {
-  const { handleData, userInput, setUserInput, userData } = props;
+  const { handleData, userInput, setUserInput, userData, redirect, setRedirect } = props;
   const didMountRef = useRef(false);
   
   useEffect(() => {
@@ -45,6 +45,11 @@ const Form = props => {
   }, [userData]);
   
   const handleChange = e => setUserInput(e.target.value);
+
+  const handleSubmit = () => {
+    fetchData(`${GITHUB_API_URL(userInput.trim())}`);
+    setRedirect(true);
+  }
   
   const fetchData = (url) => {
     trackPromise(
@@ -62,12 +67,12 @@ const Form = props => {
       <StyledForm 
         onSubmit={e => {
           e.preventDefault();
-          fetchData(`${GITHUB_API_URL(userInput.trim())}`);
+          handleSubmit();
         }
       }>
         <Label htmlFor="text">Enter a Github Username or Organization:</Label>
         <StyledInput type="text" id="text" name="text" placeholder="eg. Octocat" value={userInput} onChange={handleChange} />
-        <Link to={`/user/${userInput}`}><StyledInput type="submit" value="Submit" /></Link>
+        <StyledInput type="submit" value="Submit" />
       </StyledForm>
     </Router>
   )

@@ -22,6 +22,7 @@ const App = () => {
   const [userData, setUserData] = useState('');
   const [userRepos, setUserRepos] = useState('');
   const [userStatus, setUserStatus] = useState('')
+  const {redirect, setRedirect} = useState(false);
 
   const handleData = (data) => {
     if (data === undefined) {
@@ -49,16 +50,18 @@ const App = () => {
               userInput={userInput}
               setUserInput={setUserInput}
               userData={userData}
+              redirect={redirect}
+              setRedirect={setRedirect}
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>
-          <Route path={`/user/:${userData.login}`} render={() => (
+          { redirect ? <Redirect to={`/user/:${userData.login}`} render={() => (
             <RepoList
               userRepos={userRepos}
               userData={userData} 
               userStatus={userStatus}
             />)}
-          />
+          /> : null }
         </Wrapper>
       </main>
     </Router>
