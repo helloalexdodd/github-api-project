@@ -6,28 +6,28 @@ const Header = props => {
   const { userData, userStatus } = props;
   
   const StyledHeader = styled.header`
-  margin-bottom: 50px;
+    margin-bottom: 50px;
   `;
   
   const H1 = styled.h1`
-  margin-bottom: 10px;
-  font-size: 2rem;
+    margin-bottom: 10px;
+    font-size: 2rem;
   `;
   
   const H2 = styled.h2`
-  margin: 0;
-  ${() => userStatus === 'Sorry your search has not returned any results.' ? 'font-size: 1.2rem' : null}
+    margin: 0;
+    ${() => userStatus === 'Sorry your search has not returned any results.' ? 'font-size: 1.2rem' : null}
   `;
   
   const P = styled.p`
-  margin: 0;
+    margin: 0;
   `;
   
   const FlexContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    
   &:after {
     content: '';
     position: absolute;

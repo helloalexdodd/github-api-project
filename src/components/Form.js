@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, withRouter } from 'react-router-dom';
 import { trackPromise } from 'react-promise-tracker';
 import axios from 'axios';
 import { GITHUB_API_URL, GITHUB_API_REPOS_URL } from './../constants/GithubApi';
@@ -31,7 +31,7 @@ const StyledInput = styled.input`
 `;
 
 const Form = props => {
-  const { handleData, userInput, setUserInput, userData, setRedirect } = props;
+  const { handleData, userInput, setUserInput, userData } = props;
   const didMountRef = useRef(false);
   
   useEffect(() => {
@@ -42,15 +42,16 @@ const Form = props => {
     if (didMountRef.current) {
       fetchData(`${GITHUB_API_REPOS_URL(userData.login)}`);
     } else didMountRef.current = true;
-  }, [userData]);
+  }, [userData.login]);
   
   const handleChange = e => setUserInput(e.target.value);
 
   const handleSubmit = () => {
-    setRedirect(true);
-    fetchData(`${GITHUB_API_URL(userInput.trim())}`);
-  }
-  
+    const userName = userInput.trim();
+    props.history.push(`/user/${userName}`);
+    fetchData(`${GITHUB_API_URL(userName)}`);
+  };
+
   const fetchData = (url) => {
     trackPromise(
       axios.get(url)
@@ -60,8 +61,8 @@ const Form = props => {
           handleData();
         })
     );
-  };  
-
+  };
+  
   return (
     <Router>
       <StyledForm 
@@ -78,4 +79,4 @@ const Form = props => {
   )
 };
 
-export default Form;
+export default withRouter(Form);

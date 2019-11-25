@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { GlobalStyle, Wrapper } from './GlobalStyles';
 import Header from './components/Header';
@@ -22,21 +22,19 @@ const App = () => {
   const [userData, setUserData] = useState('');
   const [userRepos, setUserRepos] = useState('');
   const [userStatus, setUserStatus] = useState('')
-  const {redirect, setRedirect} = useState(false);
 
   const handleData = (data) => {
     if (data === undefined) {
       setUserStatus('Sorry your search has not returned any results.');
       setUserRepos('');
-      setUserInput('');
     } else if (data.login) {
       setUserStatus('');
       setUserData(data);
-      setUserInput('');
     } else if (Array.isArray(data)) {
       setUserRepos(data);
     }
-  }
+    setUserInput('');
+  };
 
   return (
     <Router>
@@ -50,17 +48,16 @@ const App = () => {
               userInput={userInput}
               setUserInput={setUserInput}
               userData={userData}
-              setRedirect={setRedirect}
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>
-          { redirect ? <Redirect to={`/user/:${userData.login}`} render={() => (
+          <Route path={`/user/:${userData.login}`} render={() => (
             <RepoList
               userRepos={userRepos}
               userData={userData} 
               userStatus={userStatus}
             />)}
-          /> : null }
+          />
         </Wrapper>
       </main>
     </Router>
