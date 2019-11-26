@@ -31,7 +31,7 @@ const StyledInput = styled.input`
 `;
 
 const Form = props => {
-  const { handleData, userInput, setUserInput, userData, history } = props;
+  const { handleData, userInput, setUserInput, userData, setUserData, setUserStatus, setUserRepos, history } = props;
   const didMountRef = useRef(false);
   
   useEffect(() => {
@@ -43,13 +43,21 @@ const Form = props => {
       fetchData(`${GITHUB_API_REPOS_URL(userData.login)}`);
     } else didMountRef.current = true;
   }, [userData.login]);
-  
+
+  window.onpopstate = () => {
+    didMountRef.current = false;
+    history.push('/');
+    setUserData('');
+    setUserStatus('');
+    setUserRepos('');
+  };
+
   const handleChange = e => setUserInput(e.target.value);
 
   const handleSubmit = () => {
     const userName = userInput.trim();
-    history.push(`/user/${userName}`);
     fetchData(`${GITHUB_API_URL(userName)}`);
+    history.push(`/user/${userName}`);
   };
 
   const fetchData = (url) => {

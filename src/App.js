@@ -29,8 +29,10 @@ const App = () => {
       setUserRepos('');
     } else if (data.login) {
       setUserStatus('');
+      setUserData('');
       setUserData(data);
     } else if (Array.isArray(data)) {
+      setUserRepos('');
       setUserRepos(data);
     }
     setUserInput('');
@@ -48,6 +50,9 @@ const App = () => {
               userInput={userInput}
               setUserInput={setUserInput}
               userData={userData}
+              setUserData={setUserData}
+              setUserStatus={setUserStatus}
+              setUserRepos={setUserRepos}
             />
             <ProfilePicture userData={userData} userStatus={userStatus} />
           </FormContainer>

@@ -20,11 +20,11 @@ const ProfilePicture = props => {
   `;
   
   const Image = styled.img`
-    max-width: 400px;
+    max-width: 350px;
     min-width: 200px;
     ${() => userData.avatar_url ? 'border-radius: 50%;' : null};
   `;
-  
+
   return (
     <ImageContainer>
       {promiseInProgress && 
